@@ -12,12 +12,12 @@ Trail _trail;
 
 void setup()
 {
-  size(1200, 600);
+  size(1000, 600);
   noCursor();
   midpointX = width * 0.5f; 
   midpointY = height * 0.5f;
   
-  frameRate(30);
+  frameRate(40);
   
   minim = new Minim(this);
   music = minim.loadFile("_music.mp3");
@@ -28,7 +28,7 @@ void setup()
     snowflakes[i] = new Snowflake();
   } 
   
-  _trail = new Trail(50, 50);
+  _trail = new Trail(25, 25);
   
   imageSetup();
   textSetup();

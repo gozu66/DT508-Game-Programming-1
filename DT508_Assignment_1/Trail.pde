@@ -20,9 +20,9 @@ class Trail
       x[i] = x[i+1];
       y[i] = y[i+1];
       
-      fill(255, 255-i*4, 255-i*4);
+      fill(255, 255-i*8, 255-i*8);
       noStroke();  
-      ellipse(x[i], y[i], i/2, i/2);
+      ellipse(x[i], y[i], i, i);
     }
   }  
 }
