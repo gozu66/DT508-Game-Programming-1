@@ -21,7 +21,6 @@ void setup()
   
   minim = new Minim(this);
   music = minim.loadFile("_music.mp3");
-  music.play();
   
   for(int i = 0; i < snowflakes.length; i++)
   {
@@ -37,12 +36,20 @@ void setup()
 void draw()
 {
   background(sky);
+  
+//  if(music.isPlaying() == false)
+//  {
+//    if(frameCount % 10 == 0)
+//    {
+//        music.play();
+//    }
+//  }
 
   renderMoon();
   
   drawImages();
   
-  println(frameRate);
+//  println(frameRate);
   
   stroke(255);
   for(int i = 0; i < snowflakes.length; i++)
@@ -54,6 +61,11 @@ void draw()
   playText();
 
   _trail.makeTrail(mouseX, mouseY);  
+  
+  if(fadeAlpha >= 0)
+  {
+    fadeIn();
+  }
 }
 
 float moonWaveTheta, moonWaveRadius = 100.0f, moonWaveX = -150.0f, moonStartPoint = height+200;
@@ -84,4 +96,12 @@ void renderMoon()
     moonWaveX = -200.0f;
     moonWaveTheta = 0;
   }
+}
+
+float fadeAlpha = 255.0f;
+void fadeIn()
+{
+  fill(0,0,0, fadeAlpha);
+  rect(0,0,width, height); 
+  fadeAlpha -= 2;
 }

@@ -1,17 +1,16 @@
-PImage mistyTara, bryan;
+PImage mistyTarabryan, RichieVanaHarley;
+float imageHeightWidth = 300.0f;
 
 void imageSetup()
 {
-  mistyTara = loadImage("mistyTara.jpg");
-  bryan = loadImage("bryan.jpg");
+  mistyTarabryan = loadImage("BryanTara+Misty.png");
+  RichieVanaHarley = loadImage("RichieVana+Harley.png");
   imageMode(CENTER);
-//  tint(255, 255, 255, 110);
+  tint(255, 205, 205, 170);
 }
 
 void drawImages()
 {
-  //  tint(255, 255, 255, 110);
-  image(mistyTara, 150, height/2, 350, 350);
-  //  image(bryan, 150, height-150, 350, 350);
+  image(mistyTarabryan, imageHeightWidth*0.5f, height-(imageHeightWidth*0.5f), imageHeightWidth, imageHeightWidth);
+  image(RichieVanaHarley, width - imageHeightWidth*0.5f, height-(imageHeightWidth*0.5f), imageHeightWidth, imageHeightWidth);
 }
-
