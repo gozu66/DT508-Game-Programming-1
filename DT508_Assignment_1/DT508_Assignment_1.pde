@@ -46,10 +46,16 @@ void draw()
 //  }
 
   renderMoon();
+   
+  drawTree(width * 0.5f, height * 0.5f, 100, 40);
+  drawTree(width * 0.125f, height * 0.65f, 60, 16);
+  drawTree(width * 0.75f, height * 0.75f, 45, -40);
+  drawTree(width * 0.95f, height * 0.52f, 75, 24);
+  drawTree(width * 0.275f, height * 0.8, 40, -45);
   
   drawImages();
   
-//  println(frameRate);
+  _trail.makeTrail(mouseX, mouseY);  
   
   stroke(255);
   for(int i = 0; i < snowflakes.length; i++)
@@ -59,8 +65,6 @@ void draw()
   }
   
   playText();
-
-  _trail.makeTrail(mouseX, mouseY);  
   
   if(fadeAlpha >= 0)
   {
@@ -93,15 +97,32 @@ void renderMoon()
   
   if(moonWaveX >= width+101)
   {
-    moonWaveX = -200.0f;
+    moonWaveX = -(moonWaveRadius*2);
     moonWaveTheta = 0;
   }
 }
 
 float fadeAlpha = 255.0f;
+
 void fadeIn()
 {
   fill(0,0,0, fadeAlpha);
   rect(0,0,width, height); 
   fadeAlpha -= 2;
 }
+
+void drawTree(float x, float y, float size, float brightness)
+{
+  float treeCenter = x;
+  float treeTop = y;
+  float treeWidth = size;
+  float treeLength = size;
+  
+  fill(0,100 + brightness, 0);
+//  stroke(0, 050, 0);
+  triangle(treeCenter, treeTop, treeCenter - treeWidth/2, treeTop + treeLength, treeCenter + treeWidth/2, treeTop + treeLength);
+  triangle(treeCenter, treeTop + treeLength - 35, treeCenter - treeWidth, treeTop + (treeLength*2.5), treeCenter + treeWidth, treeTop + (treeLength*2.5));
+  triangle(treeCenter, treeTop + (treeLength*2) - 35, treeCenter - (treeWidth*1.5), treeTop + (treeLength*4), treeCenter + (treeWidth*1.5), treeTop + (treeLength*4));
+  
+}
+
