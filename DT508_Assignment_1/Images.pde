@@ -8,7 +8,7 @@ void imageSetup()
   mistyTarabryan = loadImage("BryanTara+Misty.png");
 //  RichieVanaHarley = loadImage("RichieVana+Harley.png");
   imageMode(CENTER);
-  tint(105, 105, 105);
+  //tint(105, 105, 105);
   
   y = height-(imageHeightWidth*0.5f);
 }

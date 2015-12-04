@@ -4,6 +4,7 @@ Minim minim;
 AudioPlayer music;
 
 Snowflake[] snowflakes = new Snowflake[150];
+SnowDrift[] snowDrift = new SnowDrift[5];
 float midpointX, midpointY;
 
 color sky = color(17.0f, 35.0f, 41.0f); 
@@ -27,23 +28,29 @@ void setup()
     snowflakes[i] = new Snowflake();
   } 
   
+  for(int i = 0; i < snowDrift.length; i++)
+  {
+    snowDrift[i] = new SnowDrift();
+  }
+  
   _trail = new Trail(25, 25);
   
   imageSetup();
   textSetup();
+//  audioVisualizerSetup();
 }
 
 void draw()
 {
   background(sky);
   
-//  if(music.isPlaying() == false)
-//  {
-//    if(frameCount % 10 == 0)
-//    {
-//        music.play();
-//    }
-//  }
+  if(music.isPlaying() == false)
+  {
+    if(frameCount % 10 == 0)
+    {
+        music.play();
+    }
+  }
 
   renderMoon();
    
@@ -64,12 +71,20 @@ void draw()
     snowflakes[i].drawSnowflake();
   }
   
+  for(int i = 0; i < snowDrift.length; i++)
+  {
+    snowDrift[i].draw();
+  }
+  
   playText();
   
   if(fadeAlpha >= 0)
   {
     fadeIn();
   }
+  
+//  snowDriftDraw();
+//  audioVisualizerDraw();
 }
 
 float moonWaveTheta, moonWaveRadius = 100.0f, moonWaveX = -150.0f, moonStartPoint = height+200;
