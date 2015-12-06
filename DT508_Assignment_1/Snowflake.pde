@@ -8,6 +8,7 @@ class Snowflake
   float diagonalOffset;
   float speed;
   float xSpeedMod;
+  color col;
   
   Snowflake()
   {
@@ -19,10 +20,12 @@ class Snowflake
     diagonalOffset = random(0.2f, 0.7f);
     speed = random(1, 7);
     xSpeedMod = random(-0.5f, 0.5f);
+    col = color(random(200, 255));
   }
 
   void drawSnowflake()
   {
+    stroke(col);
     line(originX - hLegLength * 0.5f, originY, originX + hLegLength*0.5f, originY);
     line(originX, originY - vLegLength * 0.5f, originX, originY + vLegLength * 0.5f);
     line(originX - dLegLength * diagonalOffset, originY - dLegLength * diagonalOffset, originX + dLegLength * diagonalOffset, originY + dLegLength * diagonalOffset);
@@ -40,4 +43,3 @@ class Snowflake
     }
   }
 }
-
