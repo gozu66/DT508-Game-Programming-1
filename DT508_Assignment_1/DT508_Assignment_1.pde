@@ -15,8 +15,6 @@ Trail _trail;
 
 boolean slingIsFired;
 
-
-
 void setup()
 {
   size(1000, 600);
@@ -215,4 +213,3 @@ void fireSlingShot()
     }
   }
 }
-

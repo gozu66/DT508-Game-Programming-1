@@ -56,4 +56,3 @@ void snowBallHitCheck(float sbx, float sby)
       println("hit"+ count);
   }
 }
-
