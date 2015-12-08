@@ -44,14 +44,4 @@ void drawImages()
     }
   }
 }
-int hits = 0, count = 0;
 
-void snowBallHitCheck(float sbx, float sby)
-{
-  if(sbx >= (x - imageHeightWidth * 0.5f) && sbx <= (x + imageHeightWidth * 0.5f))
-  {
-      mySplat[hits].updatePosition(sbx, sby);
-      hits++;
-      count++;
-  }
-}

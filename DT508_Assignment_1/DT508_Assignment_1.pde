@@ -25,6 +25,7 @@ void setup()
   minim = new Minim(this);
   music = minim.loadFile("_music.mp3");
   splat = minim.loadFile("_splat.wav");
+  sling = minim.loadFile("_twang.wav");
     
   for (int i = 0; i < snowflakes.length; i++)
   {
@@ -40,7 +41,6 @@ void setup()
 
   imageSetup();
   textSetup();
-  //  audioVisualizerSetup();
 }
 
 void draw()
@@ -54,10 +54,12 @@ void draw()
       music.play();
     }
   }
-   if(!slingIsFired)
- {
+
+  if(!slingIsFired)
+  {
    currMpx = mpx;
- }  
+  }
+  
   renderMoon();
 
   drawTree(width * 0.5f, height * 0.5f, 100, 40);
@@ -70,7 +72,6 @@ void draw()
 
   _trail.makeTrail(mouseX, mouseY);  
 
-  stroke(255);
   for (int i = 0; i < snowflakes.length; i++)
   {
     snowflakes[i].moveSnowflake();
@@ -87,7 +88,9 @@ void draw()
   if (slingIsFired)
   {
     fireSlingShot();
-  } else {
+  } 
+  else 
+  {
     if (mousePressed)
     {
       if(!slingIsFired)
@@ -164,6 +167,7 @@ void drawSlingShot ()
 {
   mpx = mouseX;
   mpy = height * 0.5f;
+ 
   beginShape();
   strokeWeight(2);
   stroke(0);
@@ -178,6 +182,7 @@ void drawSlingShot ()
   vertex(mpx - 10, height - 40);
   vertex(mpx - 10, height);
   endShape(CLOSE);
+ 
   fill(210);
   rect(mpx - 12, height - 36, 24, 10);
   rect(mpx - 12, height - 21, 24, 10);
@@ -186,11 +191,18 @@ void drawSlingShot ()
 
 float mpxMod = 0, mpyMod = 0, currMpx;
 float snowBallDiameter = 100;
+boolean audioFired;
 
 void fireSlingShot()
 {
   if (slingIsFired)
   {
+    if(!audioFired)
+    {
+      sling.play();
+      sling.rewind();
+      audioFired = true;
+    }
     fill(255);
     ellipse(currMpx, (height - 75) + mpyMod, snowBallDiameter, snowBallDiameter);
     snowBallDiameter -= 2;
@@ -206,10 +218,29 @@ void fireSlingShot()
     else if(snowBallDiameter < 20)
     {
       slingIsFired = false;
+      audioFired = false;
       snowBallDiameter = 100;
       mpyMod = 0;
       mpxMod = 0;
-      snowBallHitCheck(currMpx, (height - 75) + mpyMod);
+      if(snowBallHitCheck(currMpx, (height - 75) + mpyMod))
+      {
+        splat.play();
+        splat.rewind();
+      }
     }
   }
+}
+
+int hits = 0, count = 0;
+
+boolean snowBallHitCheck(float sbx, float sby)
+{
+  if(sbx >= (x - imageHeightWidth * 0.5f) && sbx <= (x + imageHeightWidth * 0.5f))
+  {
+      mySplat[hits].updatePosition(sbx, sby);
+      hits++;
+      count++;
+      return true;
+  }
+  return false;
 }
