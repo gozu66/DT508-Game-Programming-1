@@ -1,4 +1,4 @@
-PImage mistyTarabryan, RichieVanaHarley;
+PImage mistyTarabryan;
 float imageHeightWidth = 300.0f;
 float x = imageHeightWidth*0.5f, y;
 float speed = 5;

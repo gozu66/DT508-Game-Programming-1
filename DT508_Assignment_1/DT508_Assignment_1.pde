@@ -1,4 +1,6 @@
 import ddf.minim.*;
+import ddf.minim.analysis.*;
+import ddf.minim.*;
 
 Minim minim;
 AudioPlayer music;
@@ -41,16 +43,19 @@ void setup()
 
   imageSetup();
   textSetup();
+  audioVisualizerSetup();
 }
+
+int frameStep = 10;
 
 void draw()
 {
-  println(frameRate);
+//  println(frameRate);
   background(sky);
 
   if (music.isPlaying() == false)
   {
-    if (frameCount % 10 == 0)
+    if (frameCount % frameStep == 0)
     {
       music.play();
     }
@@ -102,11 +107,13 @@ void draw()
   }
 
   drawSlingShot();
+  audioVisualizerDraw();  
+
 
   if (fadeAlpha >= 0)
   {
     fadeIn();
-  }  
+  }
 }
 
 float moonWaveTheta, moonWaveRadius = 100.0f, moonWaveX = -150.0f, moonStartPoint = height+200;
@@ -144,6 +151,7 @@ float fadeAlpha = 255.0f;
 void fadeIn()
 {
   fill(0, 0, 0, fadeAlpha);
+  noStroke();
   rect(0, 0, width, height); 
   fadeAlpha -= 2;
 }
