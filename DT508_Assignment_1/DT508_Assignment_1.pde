@@ -45,6 +45,7 @@ void setup()
 
 void draw()
 {
+  println(frameRate);
   background(sky);
 
   if (music.isPlaying() == false)
