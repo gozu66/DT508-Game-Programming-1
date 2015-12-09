@@ -19,15 +19,20 @@ boolean slingIsFired;
 
 void setup()
 {
-  size(1000, 600);
+  size(1000, 600, OPENGL);
   noCursor();
+  frameRate(40);
+  
   midpointX = width * 0.5f; 
   midpointY = height * 0.5f;
 
   minim = new Minim(this);
-  music = minim.loadFile("_music.mp3");
+  music = minim.loadFile("The Kinks- Father Christmas.mp3");
   splat = minim.loadFile("_splat.wav");
   sling = minim.loadFile("_twang.wav");
+  
+  music.play();
+  music.loop();
     
   for (int i = 0; i < snowflakes.length; i++)
   {
@@ -52,14 +57,6 @@ void draw()
 {
 //  println(frameRate);
   background(sky);
-
-  if (music.isPlaying() == false)
-  {
-    if (frameCount % frameStep == 0)
-    {
-      music.play();
-    }
-  }
 
   if(!slingIsFired)
   {
@@ -88,7 +85,10 @@ void draw()
   {
     snowDrift[i].draw();
   }
-
+  textSize(25);
+  fill(255, 255, 255, 255);
+  text("Left Click to Shoot Snowballs!", width / 2, height - 100); 
+  
   playText();
 
   if (slingIsFired)
@@ -106,6 +106,8 @@ void draw()
     }
   }
 
+  
+  
   drawSlingShot();
   audioVisualizerDraw();  
 
@@ -124,8 +126,6 @@ void renderMoon()
 
   float moonWaveY = moonStartPoint + cos(moonWaveTheta) * moonWaveRadius;
 
-  strokeWeight(10);
-  stroke(205, 205, 205, 125);
   fill(moon);
   ellipse(moonWaveX, moonWaveY, 200, 200);
   fill(178, 181, 194);
@@ -153,7 +153,7 @@ void fadeIn()
   fill(0, 0, 0, fadeAlpha);
   noStroke();
   rect(0, 0, width, height); 
-  fadeAlpha -= 2;
+  fadeAlpha -= 0.5f;
 }
 
 

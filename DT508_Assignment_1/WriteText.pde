@@ -25,8 +25,11 @@ void textSetup()
  
 void playText()
 {
+  textSize(75);
   fill(255, 0, 0, n);
-  text(currentText, 0, 50, width, 200);  
+  text(currentText, 0, 50, width, 200); 
+ 
+
     
   if(millis() % 2 == 0)
   {
