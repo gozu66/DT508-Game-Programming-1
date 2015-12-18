@@ -1,52 +1,46 @@
-PImage vana;
+import ddf.minim.spi.*;
+import ddf.minim.signals.*;
+import ddf.minim.*;
+import ddf.minim.analysis.*;
+import ddf.minim.ugens.*;
+import ddf.minim.effects.*;
+
+Paddle paddle;
 
 void setup()
 {
-  size(530, 530);
-  vana = loadImage("IMG_20130722_162805.jpg");
+  size(500, 500);
+  paddle = new Paddle();
 }
 
 void draw()
 {
-  image(vana, 0, 0);
-  vana.loadPixels();
+  if(keyPressed)
+  {
+    getKeys();
+  }
+  drawBackground();
+  paddle.pUpdate();
+}
+
+float pixelScaler = 0;
+void drawBackground()
+{
   loadPixels();
   for(int x = 0; x < width; x++)
   {
     for(int y = 0; y < height; y++)
     {
       int loc = x + (y * width);
-      float r = red(vana.pixels[loc]);
-      float b = blue(vana.pixels[loc]);
-      
-      pixels[loc] = color(0, 0, r);
+      float z = (x*x) + pixelScaler;
+      pixels[loc] = (int)z;
     }
   }
   updatePixels();
+  pixelScaler += 6000f;
+  
+//  fill(0, 0, 0, 200);
+//  rect(0, 0, width, height);
+  
+  println(frameRate);
 }
-
-
-
-//float xMod = 0, xModPlus = 1;
-//void drawBackground()
-//{
-//  loadPixels();
-//  
-//  for(int x = 0; x < width; x++)
-//  {
-//    for(int y = 0; y < height; y++)
-//    {
-//      int loc = x + (y * width);
-//      pixels[loc] = color(x + xMod, y + xMod, y - xMod);
-//    }
-//  }
-//  updatePixels();
-//  
-//  xMod += xModPlus;
-//  if(xMod >= 150 || xMod <= 0)
-//  {
-//    xModPlus *= -1;
-//  }
-//
-//}
-

@@ -1,0 +1,11 @@
+void getKeys()
+{
+  if(key == 'a' || keyCode == LEFT)
+  {
+    paddle.pX -= paddle.pSpeed;
+  }
+  else if(key == 'd' || keyCode == RIGHT)
+  {
+    paddle.pX += paddle.pSpeed;
+  }
+}
