@@ -12,9 +12,7 @@ class Paddle
   float pWidth, pHeight, pSpeed, pX, pY;
  
  void pUpdate()
- {
-   
-   
+ {   
    pDraw();
  }
  
