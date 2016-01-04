@@ -8,4 +8,9 @@ void getKeys()
   {
     paddle.pX += paddle.pSpeed;
   }
+  
+  if(key == 'r')
+  {
+    ball.startBall();
+  }
 }

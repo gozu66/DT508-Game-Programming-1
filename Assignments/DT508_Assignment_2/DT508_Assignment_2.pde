@@ -14,6 +14,7 @@ void setup()
 {
   size(500, 500);
   smooth();
+  rectMode(CENTER);
 
   paddle = new Paddle();
   ball= new Ball();
@@ -29,9 +30,10 @@ void draw()
   drawBackground();
   paddle.pUpdate();
   ball.bUpdate();
+  
+//  println(frameRate);
 }
 
-//float pixelScaler = 0;
 boolean isDrawn;
 void drawBackground()
 {
@@ -68,7 +70,5 @@ void drawBackground()
   {
     image(currentBackground, 0, 0, width, height);
   }
-
-//  pixelScaler += 6f;
 }
 

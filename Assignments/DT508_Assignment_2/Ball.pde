@@ -5,9 +5,14 @@ class Ball
   
   Ball()
   {
+    startBall();
+  }
+  
+  void startBall()
+  {
     bPos = new PVector(width/2, height/2);
-//    bPos = new PVector(paddle.pX - (paddle.pWidth / 2), paddle.pY);
     bSpeed = new PVector(0, 0);
+
     float speedSplit = random(-fullSpeed, fullSpeed);
     bSpeed.y = -speedSplit;
     bSpeed.x = (speedSplit > 0) ? fullSpeed - speedSplit : fullSpeed - abs(speedSplit);
@@ -20,17 +25,44 @@ class Ball
   
   void bUpdate()
   {
+        println(abs(bSpeed.x) + abs(bSpeed.y));
+
+    
     bPos.add(bSpeed);
     
-    if(bPos.y <= (bRadius / 4) || bPos.y >= height - (bRadius * 2))
+    if(bPos.y <= bRadius)
     {
-      bSpeed.y = -bSpeed.y;
+      bSpeed.y *= -1;
     }  
-    else if(bPos.x <= (bRadius / 4) || bPos.x >= width - (bRadius * 2))
+    else if(bPos.x <= bRadius || bPos.x >= width - bRadius)
     {
-      bSpeed.x = -bSpeed.x;
-    } 
+      bSpeed.x *= -1;
+    }     
+    else if(bPos.y > paddle.pY - (bRadius + (paddle.pHeight * 0.5f)) && bPos.y < paddle.pY + (bRadius - (paddle.pHeight * 0.5f)))
+    {
+      if((bPos.x - bRadius) < (paddle.pX + paddle.pWidth / 2) && (bPos.x + bRadius) >= (paddle.pX - paddle.pWidth / 2))
+      {       
+        bSpeed = paddleReflect();
+        bSpeed.y *= -1;
+      }
+    }
+    
+    if(bPos.y > height + 100)
+    {
+      startBall();
+    }
     
     bDraw();
+  }
+  
+  PVector paddleReflect()
+  {
+    float newX, newY;     
+    float distance = bPos.x - paddle.pX;
+    newX = distance / 15;
+    newY = fullSpeed - abs(newX);    
+    
+    PVector newBSpeed = new PVector(newX, newY);
+    return(newBSpeed);
   }
 }
