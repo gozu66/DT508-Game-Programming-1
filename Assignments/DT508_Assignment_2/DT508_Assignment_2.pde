@@ -13,9 +13,10 @@ PImage currentBackground;
 void setup()
 {
   size(500, 500);
+  smooth();
+
   paddle = new Paddle();
   ball= new Ball();
-//  frameRate(100);
 }
 
 void draw()
@@ -24,13 +25,13 @@ void draw()
   {
     getKeys();
   }
+  
   drawBackground();
   paddle.pUpdate();
-  ball.bDraw();
-//  println(frameRate);
+  ball.bUpdate();
 }
 
-float pixelScaler = 0;
+//float pixelScaler = 0;
 boolean isDrawn;
 void drawBackground()
 {
@@ -42,11 +43,7 @@ void drawBackground()
       for (int y = 0; y < height; y++)
       {
         int loc = x + (y * width);
-//        float n = sin(x - y) + sin(x / 10 + y / 5);
-//        float col = map(n, -1, 1, 0, 100);
-//        color c = color(col, -col, 0);
-//        color c = color(width * x, height * y, 0);
-        color c  = color(0, y, 0);
+        color c  = color(x/5, y/5, 0);
         pixels[loc] = c;
       }
     }
@@ -72,6 +69,6 @@ void drawBackground()
     image(currentBackground, 0, 0, width, height);
   }
 
-  pixelScaler += 6f;
+//  pixelScaler += 6f;
 }
 

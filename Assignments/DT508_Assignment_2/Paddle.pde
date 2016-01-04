@@ -2,9 +2,9 @@ class Paddle
 {
   Paddle()
   {
-    pWidth = width / 8;
-    pHeight = height / 64;
-    pSpeed = 1.0f;
+    pWidth = width / 6;
+    pHeight = height / 50;
+    pSpeed = 4.0f;
     pX = (width / 2) - (pWidth / 2);
     pY = height - pHeight * 4;
   }
