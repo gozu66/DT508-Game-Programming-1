@@ -20,7 +20,7 @@ void setup()
 
   paddle = new Paddle();
   ball= new Ball();
-  bricks = new Brick[1];
+  bricks = new Brick[10];
   for(int i = 0; i < bricks.length; i++)
   {
     bricks[i] = new Brick();

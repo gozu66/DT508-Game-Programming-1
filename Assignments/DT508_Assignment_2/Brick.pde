@@ -1,6 +1,6 @@
 class Brick
 {
-  float brX, brY, brWidth = 50, brHeight = 50;
+  float brX, brY, brWidth = 50, brHeight = 20;
   PVector brPos = new PVector(0, 0);
   
   Brick()

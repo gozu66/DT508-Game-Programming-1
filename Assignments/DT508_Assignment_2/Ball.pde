@@ -26,7 +26,6 @@ class Ball
   void bUpdate()
   {
     bPos.add(bSpeed);
-//    bPos = new PVector(mouseX, mouseY);
     
     if(bPos.y <= bRadius)
     {
@@ -52,47 +51,28 @@ class Ball
     
     for(int i = 0; i < bricks.length; i++)
     {
-//      if(bPos.y > bricks[i].brPos.y - (bRadius + (bricks[i].brHeight * 0.5f)) && bPos.y < bricks[i].brPos.y + (bRadius - (bricks[i].brHeight * 0.5f)))
-//      {
-//        if((bPos.x - bRadius) <= (bricks[i].brPos.x + bricks[i].brWidth) && (bPos.x + bRadius) >= (bricks[i].brPos.x - bricks[i].brWidth))
-//        {
-//          bSpeed.y *= -1;
-//          bSpeed.x *= -1;
-//            PVector ballPosiitonNow
-//            ball.bSpeed = bricks[i].brPos.sub(bPos);
-//            bPos = bSpeed.sub(bricks[i].brPos);
-//            bricks[i].brPos.sub(bSpeed);
-//            bSpeed.sub(bricks[i].brPos);
-//        }
-//        }
       float myX, myY;
       myX = abs(bricks[i].brPos.x - bPos.x) - bRadius;
       myY = abs(bricks[i].brPos.y - bPos.y) - bRadius;
-      
-//      if(myX <= bricks[i].brWidth / 2 && myY < bricks[i].brHeight / 2)
-//      {
-//        println(bSpeed.mag());
-//      }
       
       if(myX <= bricks[i].brWidth / 2)
       {
         if(myY < bricks[i].brHeight / 2)
         {
-//          bSpeed.x *= -1;
-//println(bSpeed.mag());
-                      //NEED TO GET NORMAL OF HIT SURFACE AND USE DOT/CROSS PRODUCT
+          float xDist = bricks[i].brPos.x - bPos.x;
+          float yDist = bricks[i].brPos.y - bPos.y;
+          
+          if(xDist < yDist)
+          {
+            bSpeed.x *= -1;
+          }else
+          {
+            bSpeed.y *= -1;
+          }
+          
+          bricks[i].brPos = new PVector(-50, -50);
         }
-       
       }
-// 
-//       if(myY == bricks[i].brHeight / 2)
-//      {
-//        if(myX < bricks[i].brWidth / 2)
-//        {
-//          bSpeed.y *= -1;
-//        }
-//      }
-//      println("x : " + myX + " y : " + myY);
     }
     
     bDraw();
