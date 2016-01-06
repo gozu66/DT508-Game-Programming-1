@@ -13,6 +13,7 @@ class Paddle
  
  void pUpdate()
  {   
+   pX = mouseX;
    pDraw();
  }
  

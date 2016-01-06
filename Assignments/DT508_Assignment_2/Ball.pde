@@ -25,15 +25,13 @@ class Ball
   
   void bUpdate()
   {
-        println(abs(bSpeed.x) + abs(bSpeed.y));
-
-    
     bPos.add(bSpeed);
+//    bPos = new PVector(mouseX, mouseY);
     
     if(bPos.y <= bRadius)
     {
       bSpeed.y *= -1;
-    }  
+    }
     else if(bPos.x <= bRadius || bPos.x >= width - bRadius)
     {
       bSpeed.x *= -1;
@@ -42,7 +40,7 @@ class Ball
     {
       if((bPos.x - bRadius) < (paddle.pX + paddle.pWidth / 2) && (bPos.x + bRadius) >= (paddle.pX - paddle.pWidth / 2))
       {       
-        bSpeed = paddleReflect();
+        bSpeed = reflect(paddle.pX, 10);
         bSpeed.y *= -1;
       }
     }
@@ -52,14 +50,54 @@ class Ball
       startBall();
     }
     
+    for(int i = 0; i < bricks.length; i++)
+    {
+//      if(bPos.y > bricks[i].brPos.y - (bRadius + (bricks[i].brHeight * 0.5f)) && bPos.y < bricks[i].brPos.y + (bRadius - (bricks[i].brHeight * 0.5f)))
+//      {
+//        if((bPos.x - bRadius) <= (bricks[i].brPos.x + bricks[i].brWidth) && (bPos.x + bRadius) >= (bricks[i].brPos.x - bricks[i].brWidth))
+//        {
+//          bSpeed.y *= -1;
+//          bSpeed.x *= -1;
+//            PVector ballPosiitonNow
+//            ball.bSpeed = bricks[i].brPos.sub(bPos);
+//            bPos = bSpeed.sub(bricks[i].brPos);
+//            bricks[i].brPos.sub(bSpeed);
+//            bSpeed.sub(bricks[i].brPos);
+//        }
+//        }
+      float myX, myY;
+      myX = abs(bricks[i].brPos.x - bPos.x) - bRadius;
+      myY = abs(bricks[i].brPos.y - bPos.y) - bRadius;
+      
+      if(myX < bricks[i].brWidth / 2)
+      {
+        if(myY < bricks[i].brHeight / 2)
+        {
+//          bSpeed.x *= -1;
+//          bSpeed.y *= -1;
+        }
+      }
+      
+//      if(myY < bricks[i].brHeight / 2)
+//      {
+//        if(myX < bricks[i].brWidth / 2)
+//        {
+//          bSpeed.y *= -1;
+//          break;
+//        }
+//      }
+      
+      println("x : " + myX + " y : " + myY);
+    }
+    
     bDraw();
   }
   
-  PVector paddleReflect()
+  PVector reflect(float checkPoint, float divisor)
   {
     float newX, newY;     
-    float distance = bPos.x - paddle.pX;
-    newX = distance / 15;
+    float distance = bPos.x - checkPoint;
+    newX = distance / divisor;
     newY = fullSpeed - abs(newX);    
     
     PVector newBSpeed = new PVector(newX, newY);
