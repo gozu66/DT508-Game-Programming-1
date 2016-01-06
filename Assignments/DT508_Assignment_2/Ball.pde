@@ -69,25 +69,30 @@ class Ball
       myX = abs(bricks[i].brPos.x - bPos.x) - bRadius;
       myY = abs(bricks[i].brPos.y - bPos.y) - bRadius;
       
-      if(myX < bricks[i].brWidth / 2)
+//      if(myX <= bricks[i].brWidth / 2 && myY < bricks[i].brHeight / 2)
+//      {
+//        println(bSpeed.mag());
+//      }
+      
+      if(myX <= bricks[i].brWidth / 2)
       {
         if(myY < bricks[i].brHeight / 2)
         {
 //          bSpeed.x *= -1;
-//          bSpeed.y *= -1;
+//println(bSpeed.mag());
+                      //NEED TO GET NORMAL OF HIT SURFACE AND USE DOT/CROSS PRODUCT
         }
+       
       }
-      
-//      if(myY < bricks[i].brHeight / 2)
+// 
+//       if(myY == bricks[i].brHeight / 2)
 //      {
 //        if(myX < bricks[i].brWidth / 2)
 //        {
 //          bSpeed.y *= -1;
-//          break;
 //        }
 //      }
-      
-      println("x : " + myX + " y : " + myY);
+//      println("x : " + myX + " y : " + myY);
     }
     
     bDraw();
