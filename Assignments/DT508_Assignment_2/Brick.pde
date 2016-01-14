@@ -1,12 +1,14 @@
 class Brick
 {
-  float brX, brY, brWidth = 50, brHeight = 20;
+  float brX, brY, brWidth = 30, brHeight = 30;
   PVector brPos = new PVector(0, 0);
   
   Brick()
   {
     brPos.x = random(width);
-    brPos.y = random(height);
+    brPos.y = random(height - 300);
+    
+    
   }
   
   void brUpdate()
@@ -17,5 +19,10 @@ class Brick
   void brDraw()
   {
     rect(brPos.x, brPos.y, brWidth, brHeight);
+  }
+  
+  void arrange(int number, int type)
+  {
+    
   }
 }

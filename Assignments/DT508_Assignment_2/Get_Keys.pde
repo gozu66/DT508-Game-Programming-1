@@ -13,4 +13,17 @@ void getKeys()
   {
     ball.startBall();
   }
+  
+  if(key == 'x')
+  {
+    if(_state < 1)
+    {
+      gameStart();
+      _state++;
+    } 
+    else 
+    {
+      _state = 0;
+    }
+  }
 }

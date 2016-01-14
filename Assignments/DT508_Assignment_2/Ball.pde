@@ -62,11 +62,10 @@ class Ball
           float xDist = bricks[i].brPos.x - bPos.x;
           float yDist = bricks[i].brPos.y - bPos.y;
           
-          if(xDist < yDist)
+          if(abs(xDist) > abs(yDist))
           {
             bSpeed.x *= -1;
-          }else
-          {
+          }else{
             bSpeed.y *= -1;
           }
           

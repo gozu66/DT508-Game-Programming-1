@@ -5,22 +5,29 @@ import ddf.minim.analysis.*;
 import ddf.minim.ugens.*;
 import ddf.minim.effects.*;
 
+
+
 Paddle paddle;
 Ball ball;
 Brick[] bricks;
 
 PImage currentBackground;
 
+int _state = 0;    //  _state = 0 MENU --- _state = 1 GAME ---
+
 void setup()
 {
   size(700, 700);
   smooth();
   rectMode(CENTER);
-//  frameRate(100);
+  frameRate(100);
+}
 
+void gameStart()
+{
   paddle = new Paddle();
   ball= new Ball();
-  bricks = new Brick[10];
+  bricks = new Brick[100];
   for(int i = 0; i < bricks.length; i++)
   {
     bricks[i] = new Brick();
@@ -35,15 +42,27 @@ void draw()
   }
   
   drawBackground();
-  paddle.pUpdate();
-  ball.bUpdate();
   
-  for(int i = 0; i < bricks.length; i++)
+  switch(_state)
   {
-    bricks[i].brUpdate();
+    case 0:
+      textSize(70);
+      textAlign(CENTER);
+      text("START GAME", width/2, height/2);
+      break;
+    
+    case 1:
+      paddle.pUpdate();
+      ball.bUpdate();
+          
+      for(int i = 0; i < bricks.length; i++)
+      {
+        bricks[i].brUpdate();
+      }
+      break;
   }
 
-//  println(frameRate);
+  println(frameRate);
 }
 
 boolean isDrawn;
@@ -83,3 +102,15 @@ void drawBackground()
   }
 }
 
+
+int brickRows, brickCols;
+void arrangeBlocks()
+{
+  for(int brickRows = 0; brickRows < 4; brickRows++)
+  {
+    for(int brickCols = 0; brickCols < 4; brickCols++)
+    {
+      
+    } 
+  }
+}
