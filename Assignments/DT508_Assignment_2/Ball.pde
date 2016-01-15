@@ -47,6 +47,7 @@ class Ball
     if(bPos.y > height + 100)
     {
       startBall();
+      updateLives(-1);
     }
     
     for(int i = 0; i < bricks.length; i++)
@@ -59,6 +60,8 @@ class Ball
       {
         if(myY < bricks[i].brHeight / 2)
         {
+          updateScore(1);
+          
           float xDist = bricks[i].brPos.x - bPos.x;
           float yDist = bricks[i].brPos.y - bPos.y;
           

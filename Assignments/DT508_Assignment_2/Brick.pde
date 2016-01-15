@@ -6,7 +6,7 @@ class Brick
   Brick()
   {
     brPos.x = random(width);
-    brPos.y = random(height - 300);
+    brPos.y = random(50, height - 300);
     
     
   }

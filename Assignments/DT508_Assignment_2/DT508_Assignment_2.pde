@@ -13,7 +13,7 @@ Brick[] bricks;
 
 PImage currentBackground;
 
-int _state = 0;    //  _state = 0 MENU --- _state = 1 GAME ---
+int _state = 0;    //  _state = 0 MENU --- _state = 1 GAME --- _state == 2 LOADING NEW LEVEL --- _state == 3 GAME OVER --- _state == 4 FACEMODE ---
 
 void setup()
 {
@@ -28,6 +28,10 @@ void gameStart()
   paddle = new Paddle();
   ball= new Ball();
   bricks = new Brick[100];
+  
+  score = 0;
+  lives = 5;
+  
   for(int i = 0; i < bricks.length; i++)
   {
     bricks[i] = new Brick();
@@ -59,6 +63,22 @@ void draw()
       {
         bricks[i].brUpdate();
       }
+      
+      displayScore();
+      break;
+      
+    case 2:
+      break;
+      
+    case 3:
+    
+      textSize(70);
+      textAlign(CENTER);
+      text("GAME OVER", width/2, height/2);
+      
+      break;
+      
+    case 4:
       break;
   }
 
