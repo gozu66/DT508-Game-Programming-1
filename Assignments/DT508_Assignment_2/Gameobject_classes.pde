@@ -1,6 +1,61 @@
-class Ball 
+class Brick                                          //BRICK CLASS
 {
-  float fullSpeed = 10, bRadius = 10;
+  float brX, brY, brWidth = 30, brHeight = 30;
+  PVector brPos = new PVector(0, 0);
+  
+  Brick()
+  {
+    brPos.x = random(width);
+    brPos.y = random(50, height - 300);
+    
+    
+  }
+  
+  void brUpdate()
+  {
+    brDraw();
+  }
+  
+  void brDraw()
+  {
+    rect(brPos.x, brPos.y, brWidth, brHeight);
+  }
+  
+  void arrange(int number, int type)
+  {
+    
+  }
+}
+
+class Paddle                                        //PADDLE CLASS
+{
+  Paddle()
+  {
+    pWidth = 100;
+    pHeight = height / 50;
+    pSpeed = 4.0f;
+    pX = (width / 2) - (pWidth / 2);
+    pY = height - pHeight * 4;
+  }
+  
+  float pWidth, pHeight, pSpeed, pX, pY;
+ 
+ void pUpdate()
+ {   
+   pX = mouseX;
+   pDraw();
+ }
+ 
+ void pDraw()
+ {
+   rect(pX, pY, pWidth, pHeight);
+ }
+ 
+}
+
+class Ball                                               //BALL CLASS
+{
+  float fullSpeed = 7, bRadius = 10;
   PVector bPos, bSpeed; 
   
   Ball()
@@ -41,6 +96,7 @@ class Ball
       {       
         bSpeed = reflect(paddle.pX, 10);
         bSpeed.y *= -1;
+        scoreMultiplier = 1;
       }
     }
     
@@ -48,6 +104,7 @@ class Ball
     {
       startBall();
       updateLives(-1);
+      scoreMultiplier = 1;
     }
     
     for(int i = 0; i < bricks.length; i++)

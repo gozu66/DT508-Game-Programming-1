@@ -5,15 +5,14 @@ import ddf.minim.analysis.*;
 import ddf.minim.ugens.*;
 import ddf.minim.effects.*;
 
-
-
 Paddle paddle;
 Ball ball;
 Brick[] bricks;
 
 PImage currentBackground;
+PFont myFont;
 
-int _state = 0;    //  _state = 0 MENU --- _state = 1 GAME --- _state == 2 LOADING NEW LEVEL --- _state == 3 GAME OVER --- _state == 4 FACEMODE ---
+int _state = 0;    //_state = 0 MENU --- _state = 1 GAME --- _state == 2 LOADING NEW LEVEL --- _state == 3 GAME OVER --- _state == 4 GAME FINISHED ---
 
 void setup()
 {
@@ -21,6 +20,8 @@ void setup()
   smooth();
   rectMode(CENTER);
   frameRate(100);
+  
+  myFont = createFont("ka1.ttf", 40);
 }
 
 void gameStart()
@@ -29,7 +30,6 @@ void gameStart()
   ball= new Ball();
   bricks = new Brick[100];
   
-  score = 0;
   lives = 5;
   
   for(int i = 0; i < bricks.length; i++)
@@ -50,21 +50,30 @@ void draw()
   switch(_state)
   {
     case 0:
-      textSize(70);
+    
+      rectMode(CENTER);
+      textFont(myFont);
+      textSize(60);
       textAlign(CENTER);
-      text("START GAME", width/2, height/2);
+      text("BREAKOUT 2015", width/2, height/3);
+      textSize(30);
+      textAlign(RIGHT);
+      text("Start Game", width/2 - 50, height/2);
+      textAlign(LEFT);
+      text("Face Mode", width/2 + 50, height/2);
+      
       break;
     
     case 1:
+    
+      displayData();
       paddle.pUpdate();
-      ball.bUpdate();
-          
+      ball.bUpdate();   
       for(int i = 0; i < bricks.length; i++)
       {
         bricks[i].brUpdate();
       }
       
-      displayScore();
       break;
       
     case 2:
@@ -82,7 +91,7 @@ void draw()
       break;
   }
 
-  println(frameRate);
+//  println(frameRate);
 }
 
 boolean isDrawn;

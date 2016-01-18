@@ -1,29 +1,40 @@
 void getKeys()
 {
-//  if(key == 'a' || keyCode == LEFT)
-//  {
-//    paddle.pX -= paddle.pSpeed;
-//  }
-//  else if(key == 'd' || keyCode == RIGHT)
-//  {
-//    paddle.pX += paddle.pSpeed;
-//  }
-  
   if(key == 'r')
   {
     ball.startBall();
-  }
-  
-  if(key == 'x')
+  }  
+}
+
+void mousePressed()
+{  
+  switch(_state)
   {
-    if(_state < 1)
-    {
-      gameStart();
-      _state++;
-    } 
-    else 
-    {
-      _state = 0;
-    }
-  }
+    case 0:
+    
+      if(mouseX > 55 && mouseX < 310 && mouseY > 300 && mouseY < 375)
+      {
+        println("Play Pressed");
+        gameStart();
+        _state = 1;
+      }
+      else if(mouseX > 395 && mouseX < 625 && mouseY > 300 && mouseY < 375)
+      {
+        println("Face Mode Pressed");
+      }
+      
+    break;
+    
+    case 1:
+    break;
+    
+    case 2:
+    break;
+    
+    case 3:
+    break;
+    
+    case 4:
+    break;
+  }  
 }

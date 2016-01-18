@@ -1,9 +1,11 @@
 int score;
 int lives = 5;
+float scoreMultiplier = 1;
 
 void updateScore(int amount)
 {
-  score = score + amount;
+  scoreMultiplier += 0.5f;
+  score += (amount * scoreMultiplier);
 }
 
 void updateLives(int amount)
@@ -15,12 +17,14 @@ void updateLives(int amount)
   }
 }
 
-void displayScore()
+void displayData()
 {
-//  fill(255);
+  fill(0, 255, 0);
   textAlign(LEFT);
   textSize(20);
   text("Score : " + score, 0, 25);
-  text("Lives : " + lives, 0, 50);
-//  fill(255);
+  text("Lives : " + lives, 200, 25);
+  text("multiplier : " + scoreMultiplier, 400, 25);
+  fill(255);
 }
+
