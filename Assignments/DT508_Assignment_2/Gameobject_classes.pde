@@ -7,8 +7,6 @@ class Brick                                          //BRICK CLASS
   {
     brPos.x = random(width);
     brPos.y = random(50, height - 300);
-    
-    
   }
   
   void brUpdate()
@@ -19,11 +17,6 @@ class Brick                                          //BRICK CLASS
   void brDraw()
   {
     rect(brPos.x, brPos.y, brWidth, brHeight);
-  }
-  
-  void arrange(int number, int type)
-  {
-    
   }
 }
 
@@ -40,17 +33,16 @@ class Paddle                                        //PADDLE CLASS
   
   float pWidth, pHeight, pSpeed, pX, pY;
  
- void pUpdate()
- {   
-   pX = mouseX;
-   pDraw();
- }
+  void pUpdate()
+  {   
+    pX = mouseX;
+    pDraw();
+  }
  
- void pDraw()
- {
-   rect(pX, pY, pWidth, pHeight);
- }
- 
+  void pDraw()
+  {
+    rect(pX, pY, pWidth, pHeight);
+  }
 }
 
 class Ball                                               //BALL CLASS

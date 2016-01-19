@@ -29,13 +29,8 @@ void gameStart()
   paddle = new Paddle();
   ball= new Ball();
   bricks = new Brick[100];
-  
-  lives = 5;
-  
-  for(int i = 0; i < bricks.length; i++)
-  {
-    bricks[i] = new Brick();
-  }
+    
+  assembleLevel();
 }
 
 void draw()
@@ -91,7 +86,7 @@ void draw()
       break;
   }
 
-//  println(frameRate);
+  println(frameRate);
 }
 
 boolean isDrawn;
@@ -111,19 +106,19 @@ void drawBackground()
     }
     updatePixels();
 
-    currentBackground = createImage(width, height, RGB);
-    currentBackground.loadPixels();
-    
-    for (int x = 0; x < width; x++)
-    {
-      for (int y = 0; y < height; y++)
-      {
-        int loc = x + (y * width);
-        currentBackground.pixels[loc] = pixels[loc];
-      }
-    }
+//    currentBackground = createImage(width, height, RGB);
+//    currentBackground.loadPixels();
+//    
+//    for (int x = 0; x < width; x++)
+//    {
+//      for (int y = 0; y < height; y++)
+//      {
+//        int loc = x + (y * width);
+//        currentBackground.pixels[loc] = pixels[loc];
+//      }
+//    }
 
-    isDrawn = true;
+//    isDrawn = true;
   } 
   else
   {
