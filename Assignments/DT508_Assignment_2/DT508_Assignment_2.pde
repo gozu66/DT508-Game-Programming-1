@@ -24,15 +24,6 @@ void setup()
   myFont = createFont("ka1.ttf", 40);
 }
 
-//void gameStart()
-//{
-//  assembleLevel(_state);
-//  paddle = new Paddle();
-//  ball= new Ball();
-//    
-//
-//}
-
 void draw()
 {
   if (keyPressed)
@@ -71,7 +62,7 @@ void draw()
       }   
       if(hits >= numOfBricks)
       {
-        _state = 2;
+        _state = 6;
         assembleLevel(_state);
       }
       
@@ -89,13 +80,26 @@ void draw()
       }   
       if(hits >= numOfBricks)
       {
-        _state = 3;
+        _state = 6;
       }
 
-    
       break;
       
     case 3:
+    
+      displayData();
+      paddle.pUpdate();
+      ball.bUpdate();  
+      ball.bDraw(); 
+      for(int i = 0; i < bricks.length; i++)
+      {
+        bricks[i].brUpdate();
+      }   
+      if(hits >= numOfBricks)
+      {
+        _state = 5;
+      }
+      
       break;
       
     case 4:
@@ -111,9 +115,7 @@ void draw()
       
     case 6:
       displayData();
-      paddle.pUpdate();
-      ball.bDraw();
-      
+
       textAlign(CENTER);
       fill(0,255,0);
       text("Stage Complete", width/2, height/3);
@@ -125,7 +127,7 @@ void draw()
   }
 
 //  println(frameRate);
-  println(hits);
+//  println(hits);
 //  println(numOfBricks);
 }
 
