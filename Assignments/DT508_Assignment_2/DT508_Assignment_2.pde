@@ -12,7 +12,7 @@ Brick[] bricks;
 PImage currentBackground;
 PFont myFont;
 
-int _state = 0;    //_state = 0 MENU --- _state = 1 GAME --- _state == 2 LOADING NEW LEVEL --- _state == 3 GAME OVER --- _state == 4 GAME FINISHED ---
+int _state = 0;    //_state = 0 MENU --- _state = 1 GAME1 --- _state == 2 GAME2 --- _state == 3 GAME3 --- _state == 4 GAME OVER --- _state == 5 GAME COMPLETE --- _State == 6 LEVEL TRANSITION
 
 void setup()
 {
@@ -24,14 +24,14 @@ void setup()
   myFont = createFont("ka1.ttf", 40);
 }
 
-void gameStart()
-{
-  paddle = new Paddle();
-  ball= new Ball();
-  bricks = new Brick[100];
-    
-  assembleLevel();
-}
+//void gameStart()
+//{
+//  assembleLevel(_state);
+//  paddle = new Paddle();
+//  ball= new Ball();
+//    
+//
+//}
 
 void draw()
 {
@@ -63,30 +63,70 @@ void draw()
     
       displayData();
       paddle.pUpdate();
-      ball.bUpdate();   
+      ball.bUpdate();  
+      ball.bDraw(); 
       for(int i = 0; i < bricks.length; i++)
       {
         bricks[i].brUpdate();
+      }   
+      if(hits >= numOfBricks)
+      {
+        _state = 2;
+        assembleLevel(_state);
       }
       
       break;
       
     case 2:
+    
+      displayData();
+      paddle.pUpdate();
+      ball.bUpdate();  
+      ball.bDraw(); 
+      for(int i = 0; i < bricks.length; i++)
+      {
+        bricks[i].brUpdate();
+      }   
+      if(hits >= numOfBricks)
+      {
+        _state = 3;
+      }
+
+    
       break;
       
     case 3:
-    
+      break;
+      
+    case 4:
+        
       textSize(70);
       textAlign(CENTER);
       text("GAME OVER", width/2, height/2);
       
       break;
       
-    case 4:
+    case 5:
       break;
+      
+    case 6:
+      displayData();
+      paddle.pUpdate();
+      ball.bDraw();
+      
+      textAlign(CENTER);
+      fill(0,255,0);
+      text("Stage Complete", width/2, height/3);
+      text("Press Space to Continue", width/2, height*0.5f);
+       
+      break;
+    
+    
   }
 
-  println(frameRate);
+//  println(frameRate);
+  println(hits);
+//  println(numOfBricks);
 }
 
 boolean isDrawn;
@@ -106,19 +146,19 @@ void drawBackground()
     }
     updatePixels();
 
-//    currentBackground = createImage(width, height, RGB);
-//    currentBackground.loadPixels();
-//    
-//    for (int x = 0; x < width; x++)
-//    {
-//      for (int y = 0; y < height; y++)
-//      {
-//        int loc = x + (y * width);
-//        currentBackground.pixels[loc] = pixels[loc];
-//      }
-//    }
+    currentBackground = createImage(width, height, RGB);
+    currentBackground.loadPixels();
+    
+    for (int x = 0; x < width; x++)
+    {
+      for (int y = 0; y < height; y++)
+      {
+        int loc = x + (y * width);
+        currentBackground.pixels[loc] = pixels[loc];
+      }
+    }
 
-//    isDrawn = true;
+    isDrawn = true;
   } 
   else
   {
@@ -127,14 +167,14 @@ void drawBackground()
 }
 
 
-int brickRows, brickCols;
-void arrangeBlocks()
-{
-  for(int brickRows = 0; brickRows < 4; brickRows++)
-  {
-    for(int brickCols = 0; brickCols < 4; brickCols++)
-    {
-      
-    } 
-  }
-}
+//int brickRows, brickCols;
+//void arrangeBlocks()
+//{
+//  for(int brickRows = 0; brickRows < 4; brickRows++)
+//  {
+//    for(int brickCols = 0; brickCols < 4; brickCols++)
+//    {
+//      
+//    } 
+//  }
+//}

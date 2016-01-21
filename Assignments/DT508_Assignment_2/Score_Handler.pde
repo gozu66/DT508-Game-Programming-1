@@ -1,11 +1,12 @@
-int score;
+int score, hits;
 int lives = 5;
 float scoreMultiplier = 1;
 
 void updateScore(int amount)
 {
-  scoreMultiplier += 0.5f;
+  scoreMultiplier += 1;
   score += (amount * scoreMultiplier);
+  hits++;
 }
 
 void updateLives(int amount)
@@ -13,7 +14,7 @@ void updateLives(int amount)
   lives = lives + amount;
   if(lives < 0)
   {
-    _state = 3;
+    _state = 4;
   }
 }
 

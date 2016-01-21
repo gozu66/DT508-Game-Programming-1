@@ -5,8 +5,8 @@ class Brick                                          //BRICK CLASS
   
   Brick()
   {
-    brPos.x = random(width);
-    brPos.y = random(50, height - 300);
+    brPos.x = -100;
+    brPos.y = -100;
   }
   
   void brUpdate()
@@ -124,9 +124,7 @@ class Ball                                               //BALL CLASS
           bricks[i].brPos = new PVector(-50, -50);
         }
       }
-    }
-    
-    bDraw();
+    }    
   }
   
   PVector reflect(float checkPoint, float divisor)
