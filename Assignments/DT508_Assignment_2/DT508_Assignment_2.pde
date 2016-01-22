@@ -111,6 +111,9 @@ void draw()
       break;
       
     case 5:
+    
+      highScoreList();
+      
       break;
       
     case 6:
@@ -122,13 +125,9 @@ void draw()
       text("Press Space to Continue", width/2, height*0.5f);
        
       break;
-    
-    
   }
 
 //  println(frameRate);
-//  println(hits);
-//  println(numOfBricks);
 }
 
 boolean isDrawn;
@@ -167,16 +166,3 @@ void drawBackground()
     image(currentBackground, 0, 0, width, height);
   }
 }
-
-
-//int brickRows, brickCols;
-//void arrangeBlocks()
-//{
-//  for(int brickRows = 0; brickRows < 4; brickRows++)
-//  {
-//    for(int brickCols = 0; brickCols < 4; brickCols++)
-//    {
-//      
-//    } 
-//  }
-//}

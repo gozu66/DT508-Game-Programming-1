@@ -20,6 +20,9 @@ class Brick                                          //BRICK CLASS
   }
 }
 
+
+
+
 class Paddle                                        //PADDLE CLASS
 {
   Paddle()
@@ -44,6 +47,9 @@ class Paddle                                        //PADDLE CLASS
     rect(pX, pY, pWidth, pHeight);
   }
 }
+
+
+
 
 class Ball                                               //BALL CLASS
 {

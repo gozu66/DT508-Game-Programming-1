@@ -44,5 +44,4 @@ void assembleLevel(int currentState)
         bricks[loc].brPos.y = 50 + (bricks[loc].brHeight * 2) * c;
       }
     }
-
 }
