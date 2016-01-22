@@ -128,6 +128,7 @@ void draw()
   }
 
 //  println(frameRate);
+//  println(scoreInput);
 }
 
 boolean isDrawn;
