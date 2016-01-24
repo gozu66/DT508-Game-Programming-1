@@ -10,6 +10,7 @@ void assembleLevel(int currentState)
       rows = 5;
       cols = 4;
       hits = 0;
+      lives = 5;
     }
     else if (_state == 2)
     {
@@ -17,6 +18,7 @@ void assembleLevel(int currentState)
       rows = 6;
       cols = 5;
       hits = 0;
+      lives = 5;
     }
     else if (_state == 3)
     {
@@ -24,6 +26,7 @@ void assembleLevel(int currentState)
       rows = 5;
       cols = 10;
       hits = 0;
+      lives = 5;
     }
 
     paddle = new Paddle();
@@ -40,8 +43,15 @@ void assembleLevel(int currentState)
       {
         int loc = r + (c * rows);
         int xVal = width / rows;
-        bricks[loc].brPos.x = r * xVal + bricks[loc].brWidth * 2;
-        bricks[loc].brPos.y = 50 + (bricks[loc].brHeight * 2) * c;
+        if(c % 2 == 0)
+        {
+          bricks[loc].brPos.x = r * xVal + bricks[loc].brWidth * 2 + 40;
+        }
+        else
+        {
+          bricks[loc].brPos.x = r * xVal + 40;
+        }
+        bricks[loc].brPos.y = 50 + (bricks[loc].brHeight * 1.4f) * c;
       }
     }
 }

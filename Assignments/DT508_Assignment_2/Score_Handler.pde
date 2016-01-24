@@ -24,8 +24,8 @@ void displayData()
   textAlign(LEFT);
   textSize(20);
   text("Score : " + score, 0, 25);
-  text("Lives : " + lives, 200, 25);
-  text("multiplier : " + scoreMultiplier, 400, 25);
+  text("Lives : " + lives, 250, 25);
+  text("multiplier : " + scoreMultiplier, 450, 25);
   fill(255);
 }
 

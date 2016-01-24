@@ -14,12 +14,21 @@ PFont myFont;
 
 int _state = 0;    //_state = 0 MENU --- _state = 1 GAME1 --- _state == 2 GAME2 --- _state == 3 GAME3 --- _state == 4 GAME OVER --- _state == 5 GAME COMPLETE --- _State == 6 LEVEL TRANSITION
 
+Minim minim;
+AudioPlayer paddleHit, brickHit, wallHit, lifeLost;
+
 void setup()
 {
   size(700, 700);
   smooth();
   rectMode(CENTER);
-  frameRate(100);
+  frameRate(60);
+  
+  minim = new Minim(this);
+  paddleHit = minim.loadFile("paddleHit1.wav");
+  brickHit = minim.loadFile("brickHit1.wav");
+  wallHit = minim.loadFile("wallHit1.wav");
+  lifeLost = minim.loadFile("lifeLost1.wav");
   
   myFont = createFont("ka1.ttf", 40);
 }
@@ -48,7 +57,7 @@ void draw()
       textAlign(LEFT);
       text("Face Mode", width/2 + 50, height/2);
       
-      break;
+    break;
     
     case 1:
     
@@ -66,7 +75,7 @@ void draw()
         assembleLevel(_state);
       }
       
-      break;
+    break;
       
     case 2:
     
@@ -83,7 +92,7 @@ void draw()
         _state = 6;
       }
 
-      break;
+    break;
       
     case 3:
     
@@ -100,7 +109,7 @@ void draw()
         _state = 5;
       }
       
-      break;
+    break;
       
     case 4:
         
@@ -108,13 +117,13 @@ void draw()
       textAlign(CENTER);
       text("GAME OVER", width/2, height/2);
       
-      break;
+    break;
       
     case 5:
     
       highScoreList();
       
-      break;
+    break;
       
     case 6:
       displayData();
@@ -124,7 +133,7 @@ void draw()
       text("Stage Complete", width/2, height/3);
       text("Press Space to Continue", width/2, height*0.5f);
        
-      break;
+    break;
   }
 
 //  println(frameRate);
@@ -132,6 +141,7 @@ void draw()
 }
 
 boolean isDrawn;
+int step = 1;
 void drawBackground()
 {
   if (!isDrawn)
@@ -141,29 +151,21 @@ void drawBackground()
     {
       for (int y = 0; y < height; y++)
       {
-        int loc = x + (y * width);
-        color c  = color(x/5, 0, y/5);
-        pixels[loc] = c;
+        if(y % step == 0)
+        {
+          int loc = x + (y * width);
+          color c  = color(x*step, 0, y*step);
+          pixels[loc] = c;
+        }
       }
     }
-    updatePixels();
-
-    currentBackground = createImage(width, height, RGB);
-    currentBackground.loadPixels();
     
-    for (int x = 0; x < width; x++)
+    step += 1;
+    if(step % 15 == 0)
     {
-      for (int y = 0; y < height; y++)
-      {
-        int loc = x + (y * width);
-        currentBackground.pixels[loc] = pixels[loc];
-      }
+      step = 1;
     }
-
-    isDrawn = true;
+    
+    updatePixels();
   } 
-  else
-  {
-    image(currentBackground, 0, 0, width, height);
-  }
 }

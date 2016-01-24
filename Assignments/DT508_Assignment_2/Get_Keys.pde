@@ -9,6 +9,7 @@ void getKeys()
   {
     ball.startBall();
   }
+  
   if(key == ' ')
   {
     if(_state == 6)
@@ -18,7 +19,6 @@ void getKeys()
       assembleLevel(_state);
     }
   }
- 
 }
 
 void mousePressed()
@@ -40,12 +40,30 @@ void mousePressed()
     break;
     
     case 1:
+    
+      if(ball.isReady)
+      {
+        ball.shootBall();
+      }
+          
     break;
     
     case 2:
+      
+      if(ball.isReady)
+      {
+        ball.shootBall();
+      }
+      
     break;
-    
+       
     case 3:
+         
+      if(ball.isReady)
+      {
+        ball.shootBall();
+      }
+        
     break;
     
     case 4:

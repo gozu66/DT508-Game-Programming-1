@@ -16,6 +16,8 @@ class Brick                                          //BRICK CLASS
   
   void brDraw()
   {
+    noStroke();
+    fill(85, 0, 85, 75);    
     rect(brPos.x, brPos.y, brWidth, brHeight);
   }
 }
@@ -44,17 +46,17 @@ class Paddle                                        //PADDLE CLASS
  
   void pDraw()
   {
+    noStroke();
+    fill(85, 0, 85, 200);
     rect(pX, pY, pWidth, pHeight);
   }
 }
 
-
-
-
 class Ball                                               //BALL CLASS
 {
-  float fullSpeed = 7, bRadius = 10;
+  float fullSpeed = 10, bRadius = 10;
   PVector bPos, bSpeed; 
+  boolean isReady;
   
   Ball()
   {
@@ -63,9 +65,14 @@ class Ball                                               //BALL CLASS
   
   void startBall()
   {
-    bPos = new PVector(width/2, height/2);
+    bPos = new PVector(paddle.pX, paddle.pY - 20);
     bSpeed = new PVector(0, 0);
-
+    isReady = true;
+  }
+  
+  void shootBall()
+  {
+    isReady = false;
     float speedSplit = random(-fullSpeed, fullSpeed);
     bSpeed.y = -speedSplit;
     bSpeed.x = (speedSplit > 0) ? fullSpeed - speedSplit : fullSpeed - abs(speedSplit);
@@ -73,20 +80,31 @@ class Ball                                               //BALL CLASS
   
   void bDraw()
   {
+    fill(30, 200, 30, 175);
     rect(bPos.x, bPos.y, bRadius*2, bRadius*2);
   }
   
   void bUpdate()
   {
+    if(isReady)
+    {
+      bPos = new PVector(paddle.pX, paddle.pY - 20);
+      
+    }
+    
     bPos.add(bSpeed);
     
     if(bPos.y <= bRadius)
     {
       bSpeed.y *= -1;
+      wallHit.play();
+      wallHit.rewind();
     }
     else if(bPos.x <= bRadius || bPos.x >= width - bRadius)
     {
       bSpeed.x *= -1;
+      wallHit.play();
+      wallHit.rewind();
     }     
     else if(bPos.y > paddle.pY - (bRadius + (paddle.pHeight * 0.5f)) && bPos.y < paddle.pY + (bRadius - (paddle.pHeight * 0.5f)))
     {
@@ -95,6 +113,8 @@ class Ball                                               //BALL CLASS
         bSpeed = reflect(paddle.pX, 10);
         bSpeed.y *= -1;
         scoreMultiplier = 1;
+        paddleHit.play();
+        paddleHit.rewind();
       }
     }
     
@@ -103,6 +123,8 @@ class Ball                                               //BALL CLASS
       startBall();
       updateLives(-1);
       scoreMultiplier = 1;
+      lifeLost.play();
+      lifeLost.rewind();
     }
     
     for(int i = 0; i < bricks.length; i++)
@@ -115,7 +137,9 @@ class Ball                                               //BALL CLASS
       {
         if(myY < bricks[i].brHeight / 2)
         {
-          updateScore(1);
+          updateScore(10);
+          brickHit.play();
+          brickHit.rewind();
           
           float xDist = bricks[i].brPos.x - bPos.x;
           float yDist = bricks[i].brPos.y - bPos.y;
