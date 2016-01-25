@@ -11,6 +11,7 @@ float audioOutput = 0;
 void audioVisualizerDraw()
 {
   fft.forward(music.mix);
-  audioOutput = fft.getBand(1);
+  audioOutput = fft.getBand(0) * 4;
+  println(audioOutput);
 }
 
