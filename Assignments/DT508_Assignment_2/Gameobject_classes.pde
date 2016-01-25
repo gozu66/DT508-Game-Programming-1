@@ -73,7 +73,7 @@ class Ball                                               //BALL CLASS
   void shootBall()
   {
     isReady = false;
-    float speedSplit = random(-fullSpeed, fullSpeed);
+    float speedSplit = random(-(fullSpeed / 2), fullSpeed / 2);
     bSpeed.y = -speedSplit;
     bSpeed.x = (speedSplit > 0) ? fullSpeed - speedSplit : fullSpeed - abs(speedSplit);
   }
@@ -81,7 +81,7 @@ class Ball                                               //BALL CLASS
   void bDraw()
   {
     fill(30, 200, 30, 175);
-    rect(bPos.x, bPos.y, bRadius*2, bRadius*2);
+    ellipse(bPos.x, bPos.y, bRadius*2, bRadius*2);
   }
   
   void bUpdate()
@@ -89,7 +89,6 @@ class Ball                                               //BALL CLASS
     if(isReady)
     {
       bPos = new PVector(paddle.pX, paddle.pY - 20);
-      
     }
     
     bPos.add(bSpeed);

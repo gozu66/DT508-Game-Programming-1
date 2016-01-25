@@ -15,7 +15,7 @@ PFont myFont;
 int _state = 0;    //_state = 0 MENU --- _state = 1 GAME1 --- _state == 2 GAME2 --- _state == 3 GAME3 --- _state == 4 GAME OVER --- _state == 5 GAME COMPLETE --- _State == 6 LEVEL TRANSITION
 
 Minim minim;
-AudioPlayer paddleHit, brickHit, wallHit, lifeLost;
+AudioPlayer paddleHit, brickHit, wallHit, lifeLost, music;
 
 void setup()
 {
@@ -25,10 +25,16 @@ void setup()
   frameRate(60);
   
   minim = new Minim(this);
+  music = minim.loadFile("Vectorwolf - Street Justice.mp3");
   paddleHit = minim.loadFile("paddleHit1.wav");
   brickHit = minim.loadFile("brickHit1.wav");
   wallHit = minim.loadFile("wallHit1.wav");
   lifeLost = minim.loadFile("lifeLost1.wav");
+  
+  music.play();
+  music.loop();
+  
+  audioVisualizerSetup();
   
   myFont = createFont("ka1.ttf", 40);
 }
@@ -39,8 +45,10 @@ void draw()
   {
     getKeys();
   }
-  
+    
   drawBackground();
+  
+  audioVisualizerDraw();
   
   switch(_state)
   {
@@ -136,8 +144,7 @@ void draw()
     break;
   }
 
-//  println(frameRate);
-//  println(scoreInput);
+  println(frameRate);
 }
 
 boolean isDrawn;
@@ -154,17 +161,21 @@ void drawBackground()
         if(y % step == 0)
         {
           int loc = x + (y * width);
-          color c  = color(x*step, 0, y*step);
+          color c  = color(x*(step/1.1f), 0, y*(step/1.1f));
           pixels[loc] = c;
         }
       }
     }
     
-    step += 1;
-    if(step % 15 == 0)
+    if(frameCount % 2 == 0)
     {
-      step = 1;
+      step = (int)audioOutput + 1;
     }
+//    step += 1;
+//    if(step % 15 == 0)
+//    {
+//      step = 1;
+//    }
     
     updatePixels();
   } 
