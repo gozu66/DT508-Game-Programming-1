@@ -6,6 +6,7 @@ void updateScore(int amount)
 {
   scoreMultiplier += 1;
   score += (amount * scoreMultiplier);
+  brickIsHit = true;
   hits++;
 }
 

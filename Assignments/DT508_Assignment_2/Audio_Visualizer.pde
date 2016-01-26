@@ -7,11 +7,13 @@ void audioVisualizerSetup()
 
 int AVStep = 8;
 float audioOutput = 0;
+float audioOutput2 = 0;
 
 void audioVisualizerDraw()
 {
   fft.forward(music.mix);
-  audioOutput = fft.getBand(0) * 4;
+  audioOutput = fft.getBand(0);
+  audioOutput2 = fft.getBand(60) * 20;
   println(audioOutput);
 }
 

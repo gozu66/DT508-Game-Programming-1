@@ -144,11 +144,14 @@ void draw()
     break;
   }
 
-  println(frameRate);
+//  println(frameRate);
+  println(brickIsHit);
 }
 
-boolean isDrawn;
-int step = 1;
+boolean isDrawn, brickIsHit;
+int step = 1, step2 = 1, step3 = 1;
+
+
 void drawBackground()
 {
   if (!isDrawn)
@@ -160,22 +163,34 @@ void drawBackground()
       {
         if(y % step == 0)
         {
-          int loc = x + (y * width);
-          color c  = color(x*(step/1.1f), 0, y*(step/1.1f));
-          pixels[loc] = c;
+          if(!brickIsHit)
+          {
+            int loc = x + (y * width);
+            color c  = color(step3, 0, step2);
+            pixels[loc] = c;
+          }
+          else
+          {
+            int loc = x + (y * width);
+            color c  = color(255, 255, 255);
+            pixels[loc] = c;           
+          }
         }
       }
     }
     
+    brickIsHit = false;
+    
     if(frameCount % 2 == 0)
     {
-      step = (int)audioOutput + 1;
+      step3 = (int)audioOutput + 1;
+      step2 = (int)audioOutput2 + 1;
     }
-//    step += 1;
-//    if(step % 15 == 0)
-//    {
-//      step = 1;
-//    }
+    step += 1;
+    if(step % 15 == 0)
+    {
+      step = 1;
+    }
     
     updatePixels();
   } 
