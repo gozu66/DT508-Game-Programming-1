@@ -167,3 +167,31 @@ class Ball                                               //BALL CLASS
     return(newBSpeed);
   }
 }
+
+
+
+class PowerUp                        //POWER UP CLASS
+{
+  PVector PUPos;
+  PVector PUspeed;
+ 
+  color PUcol;
+  
+  PowerUp()
+  {
+    PUPos.x = random(25, width - 25);
+    PUPos.y = -20;
+  }
+  
+  void PUUpdate()
+  {
+    
+    
+    PUDraw();
+  }
+  
+  void PUDraw()
+  {
+    
+  }
+}

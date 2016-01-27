@@ -145,7 +145,6 @@ void draw()
   }
 
 //  println(frameRate);
-  println(brickIsHit);
 }
 
 boolean isDrawn, brickIsHit;

@@ -14,6 +14,6 @@ void audioVisualizerDraw()
   fft.forward(music.mix);
   audioOutput = fft.getBand(0);
   audioOutput2 = fft.getBand(60) * 20;
-  println(audioOutput);
+//  println(audioOutput);
 }
 
