@@ -26,21 +26,22 @@ class Brick                                          //BRICK CLASS
 
 
 class Paddle                                        //PADDLE CLASS
-{
+{  
+  float pWidth, pHeight, pSpeed;
+  PVector pPos = new PVector(0, 0);
+
   Paddle()
   {
     pWidth = 100;
     pHeight = height / 50;
     pSpeed = 4.0f;
-    pX = (width / 2) - (pWidth / 2);
-    pY = height - pHeight * 4;
+    pPos.x = (width / 2) - (pWidth / 2);
+    pPos.y = height - pHeight * 4;
   }
   
-  float pWidth, pHeight, pSpeed, pX, pY;
- 
   void pUpdate()
   {   
-    pX = mouseX;
+    pPos.x = mouseX;
     pDraw();
   }
  
@@ -48,7 +49,7 @@ class Paddle                                        //PADDLE CLASS
   {
     noStroke();
     fill(85, 0, 85, 200);
-    rect(pX, pY, pWidth, pHeight);
+    rect(pPos.x, pPos.y, pWidth, pHeight);
   }
 }
 
@@ -65,7 +66,7 @@ class Ball                                               //BALL CLASS
   
   void startBall()
   {
-    bPos = new PVector(paddle.pX, paddle.pY - 20);
+    bPos = new PVector(paddle.pPos.x, paddle.pPos.y - 20);
     bSpeed = new PVector(0, 0);
     isReady = true;
   }
@@ -88,7 +89,7 @@ class Ball                                               //BALL CLASS
   {
     if(isReady)
     {
-      bPos = new PVector(paddle.pX, paddle.pY - 20);
+      bPos = new PVector(paddle.pPos.x, paddle.pPos.y - 20);
     }
     
     bPos.add(bSpeed);
@@ -105,11 +106,11 @@ class Ball                                               //BALL CLASS
       wallHit.play();
       wallHit.rewind();
     }     
-    else if(bPos.y > paddle.pY - (bRadius + (paddle.pHeight * 0.5f)) && bPos.y < paddle.pY + (bRadius - (paddle.pHeight * 0.5f)))
+    else if(bPos.y > paddle.pPos.y - (bRadius + (paddle.pHeight * 0.5f)) && bPos.y < paddle.pPos.y + (bRadius - (paddle.pHeight * 0.5f)))
     {
-      if((bPos.x - bRadius) < (paddle.pX + paddle.pWidth / 2) && (bPos.x + bRadius) >= (paddle.pX - paddle.pWidth / 2))
+      if((bPos.x - bRadius) < (paddle.pPos.x + paddle.pWidth / 2) && (bPos.x + bRadius) >= (paddle.pPos.x - paddle.pWidth / 2))
       {       
-        bSpeed = reflect(paddle.pX, 10);
+        bSpeed = reflect(paddle.pPos.x, 10);
         bSpeed.y *= -1;
         scoreMultiplier = 1;
         paddleHit.play();
@@ -172,26 +173,36 @@ class Ball                                               //BALL CLASS
 
 class PowerUp                        //POWER UP CLASS
 {
-  PVector PUPos;
-  PVector PUspeed;
- 
+  PVector PUPos = new PVector(0,0);
+  PVector PUspeed; 
   color PUcol;
+  float PUWidth = 20;
   
   PowerUp()
   {
     PUPos.x = random(25, width - 25);
-    PUPos.y = -20;
+    PUPos.y = -10;
   }
   
   void PUUpdate()
   {
-    
-    
+    PUPos.y++;
     PUDraw();
+    if (PUPos.dist(ball.bPos) < 50 || PUPos.dist(paddle.pPos) < 50)
+    {
+      println("fuckkkk");
+    }
+
   }
   
   void PUDraw()
   {
-    
+    fill(255, 255, 25);
+    for(int i = 0; i < 5; i++)
+    {
+      int x = (int)random(50);
+      int y = (int)random(50);
+      rect(PUPos.x + x, PUPos.y + y, 5, 5); 
+    }
   }
 }

@@ -10,15 +10,6 @@ void getKeys()
     ball.startBall();
   }
   
-  if(key == ' ')
-  {
-    if(_state == 6)
-    {
-      _state = currentLevel + 1;
-      currentLevel++;
-      assembleLevel(_state);
-    }
-  }
 }
 
 void mousePressed()
@@ -67,6 +58,18 @@ void mousePressed()
     break;
     
     case 4:
+      _state = 0;
+    break;
+    
+    case 5:
+    break;
+    
+    case 6:
+    
+      _state = currentLevel + 1;
+      currentLevel++;
+      assembleLevel(_state);
+    
     break;
   }  
 }

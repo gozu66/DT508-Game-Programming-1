@@ -1,3 +1,8 @@
+Paddle paddle;
+Ball ball;
+Brick[] bricks;
+PowerUp[] pUps;
+
 int numOfBricks;
 int currentLevel = 1;
 
@@ -32,6 +37,7 @@ void assembleLevel(int currentState)
     paddle = new Paddle();
     ball = new Ball();
     bricks = new Brick[numOfBricks];
+    
     for(int i = 0; i < bricks.length; i++)
     {
       bricks[i] = new Brick();
@@ -54,4 +60,10 @@ void assembleLevel(int currentState)
         bricks[loc].brPos.y = 50 + (bricks[loc].brHeight * 1.4f) * c;
       }
     }
+    
+    pUps = new PowerUp[1];
+    for(int i = 0; i < pUps.length; i++)
+    {
+      pUps[i] = new PowerUp();
+    }  
 }
