@@ -1,7 +1,7 @@
 Paddle paddle;
 Ball ball;
 Brick[] bricks;
-PowerUp[] pUps;
+PowerUp pUp;
 
 int numOfBricks;
 int currentLevel = 1;
@@ -61,9 +61,5 @@ void assembleLevel(int currentState)
       }
     }
     
-    pUps = new PowerUp[1];
-    for(int i = 0; i < pUps.length; i++)
-    {
-      pUps[i] = new PowerUp();
-    }  
+    pUp = new PowerUp();
 }

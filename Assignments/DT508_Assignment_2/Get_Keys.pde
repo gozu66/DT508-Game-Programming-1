@@ -25,7 +25,7 @@ void mousePressed()
       }
       else if(mouseX > 395 && mouseX < 625 && mouseY > 300 && mouseY < 375)
       {
-//        println("Face Mode Pressed");
+        _state = 5;
       }
       
     break;
@@ -62,6 +62,7 @@ void mousePressed()
     break;
     
     case 5:
+      _state = 0;
     break;
     
     case 6:

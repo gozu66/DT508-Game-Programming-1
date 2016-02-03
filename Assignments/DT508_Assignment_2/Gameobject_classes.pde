@@ -74,14 +74,14 @@ class Ball                                               //BALL CLASS
   void shootBall()
   {
     isReady = false;
-    float speedSplit = random(-(fullSpeed / 2), fullSpeed / 2);
-    bSpeed.y = -speedSplit;
-    bSpeed.x = (speedSplit > 0) ? fullSpeed - speedSplit : fullSpeed - abs(speedSplit);
+    float speedSplit = random(-fullSpeed / 2, fullSpeed / 2);
+    bSpeed.x = speedSplit;
+    bSpeed.y = (speedSplit > 0) ? fullSpeed - speedSplit : fullSpeed - abs(speedSplit);
   }
   
   void bDraw()
   {
-    fill(30, 200, 30, 175);
+    fill(0, 200, 70, 175);
     ellipse(bPos.x, bPos.y, bRadius*2, bRadius*2);
   }
   
@@ -102,9 +102,12 @@ class Ball                                               //BALL CLASS
     }
     else if(bPos.x <= bRadius || bPos.x >= width - bRadius)
     {
-      bSpeed.x *= -1;
-      wallHit.play();
-      wallHit.rewind();
+      if(!isReady)
+      {
+        bSpeed.x *= -1;
+        wallHit.play();
+        wallHit.rewind();
+      }
     }     
     else if(bPos.y > paddle.pPos.y - (bRadius + (paddle.pHeight * 0.5f)) && bPos.y < paddle.pPos.y + (bRadius - (paddle.pHeight * 0.5f)))
     {
@@ -137,7 +140,7 @@ class Ball                                               //BALL CLASS
       {
         if(myY < bricks[i].brHeight / 2)
         {
-          updateScore(10);
+          updateScore(10, bricks[i].brPos);
           brickHit.play();
           brickHit.rewind();
           
@@ -174,7 +177,7 @@ class Ball                                               //BALL CLASS
 class PowerUp                        //POWER UP CLASS
 {
   PVector PUPos = new PVector(0,0);
-  PVector PUspeed; 
+  float PUSpeed; 
   color PUcol;
   float PUWidth = 20;
   
@@ -182,17 +185,36 @@ class PowerUp                        //POWER UP CLASS
   {
     PUPos.x = random(25, width - 25);
     PUPos.y = -10;
+    PUSpeed = rndSpeed();
   }
   
   void PUUpdate()
   {
-    PUPos.y++;
+    PUPos.y += PUSpeed;
     PUDraw();
+    
     if (PUPos.dist(ball.bPos) < 50 || PUPos.dist(paddle.pPos) < 50)
     {
-      println("fuckkkk");
+      updateScorePU(50);
+      powerUpHit.play();
+      powerUpHit.rewind();
+      PUPos.x = random(25, width - 25);
+      PUPos.y = -400;
+      PUSpeed = rndSpeed();
+      println("hhh");
     }
 
+    if(PUPos.y > height + 50)
+    {
+      PUPos.x = random(25, width - 25);
+      PUPos.y = random(-500);
+      PUSpeed = rndSpeed();
+    }
+  }
+  
+  float rndSpeed()
+  {
+    return(random(3, 8));
   }
   
   void PUDraw()

@@ -9,9 +9,10 @@ PImage currentBackground;
 PFont myFont;
 
 int _state = 0;    //_state = 0 MENU --- _state = 1 GAME1 --- _state == 2 GAME2 --- _state == 3 GAME3 --- _state == 4 GAME OVER --- _state == 5 GAME COMPLETE --- _State == 6 LEVEL TRANSITION
+boolean setupComplete;
 
 Minim minim;
-AudioPlayer paddleHit, brickHit, wallHit, lifeLost, music;
+AudioPlayer paddleHit, brickHit, wallHit, lifeLost, powerUpHit, music;
 
 void setup()
 {
@@ -26,17 +27,21 @@ void setup()
   brickHit = minim.loadFile("brickHit1.wav");
   wallHit = minim.loadFile("wallHit1.wav");
   lifeLost = minim.loadFile("lifeLost1.wav");
+  powerUpHit = minim.loadFile("powerUpHit1.wav");
 
+  brickHit.setGain(-15);
+  paddleHit.setGain(-10);
+  wallHit.setGain(100);
+  powerUpHit.setGain(-5);
+  
   music.play();
   music.loop();
 
   audioVisualizerSetup();
 
   myFont = createFont("ka1.ttf", 40);
-
-  brickHit.setGain(-15);
-  paddleHit.setGain(-10);
-  wallHit.setGain(100);
+  
+  background(0);
 }
 
 void draw()
@@ -45,9 +50,11 @@ void draw()
   {
     getKeys();
   }
-
-  drawBackground();
-
+  
+  if(millis() > 500)
+  {
+    drawBackground();
+  }
   audioVisualizerDraw();
 
   switch(_state)
@@ -58,12 +65,13 @@ void draw()
     textFont(myFont);
     textSize(60);
     textAlign(CENTER);
-    text("BREAKOUT 2015", width/2, height/3);
+    fill(0,200,70);
+    text("BREAKOUT 2016", width/2, height/3);
     textSize(30);
     textAlign(RIGHT);
     text("Start Game", width/2 - 50, height/2);
     textAlign(LEFT);
-    text("Face Mode", width/2 + 50, height/2);
+    text("High Scores", width/2 + 50, height/2);
 
     break;
 
@@ -73,10 +81,7 @@ void draw()
     paddle.pUpdate();
     ball.bUpdate();  
     ball.bDraw(); 
-    for (int i = 0; i < pUps.length; i++)
-    {
-      pUps[i].PUUpdate();
-    }
+    pUp.PUUpdate();
     
     for (int i = 0; i < bricks.length; i++)
     {
@@ -97,6 +102,8 @@ void draw()
     paddle.pUpdate();
     ball.bUpdate();  
     ball.bDraw(); 
+    pUp.PUUpdate();
+
     for (int i = 0; i < bricks.length; i++)
     {
       bricks[i].brUpdate();
@@ -114,6 +121,8 @@ void draw()
     paddle.pUpdate();
     ball.bUpdate();  
     ball.bDraw(); 
+    pUp.PUUpdate();
+
     for (int i = 0; i < bricks.length; i++)
     {
       bricks[i].brUpdate();
@@ -129,7 +138,7 @@ void draw()
 
     textSize(50);
     textAlign(CENTER);
-    fill(0, 255, 0);
+    fill(0, 200, 70);
     text("GAME OVER", width/2, height*0.25f);
     textSize(20);
     text("Click to Continue", width/2, height*0.75f);
@@ -139,6 +148,9 @@ void draw()
   case 5:
 
     highScoreList();
+    textSize(20);
+    fill(0, 200, 70);
+    text("Click to Continue", width/2, height*0.9f);
 
     break;
 
@@ -146,12 +158,12 @@ void draw()
     displayData();
 
     textAlign(CENTER);
-    fill(0, 255, 0);
+    fill(0, 200, 70);
     text("Stage Complete", width/2, height/3);
     text("Click to Continue", width/2, height*0.5f);
 
     break;
   }
 
-  //  println(frameRate);
+  println(frameRate);
 }

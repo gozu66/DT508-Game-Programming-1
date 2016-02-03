@@ -21,11 +21,8 @@ int step = 1, step2 = 1, step3 = 1;
 
 void drawBackground()
 {
-//  if (frameCount % 2 == 0)
-//  {
-    step3 = (int)audioOutput + 1;
-    step2 = (int)audioOutput2 + 1;
-//  }
+  step3 = (int)audioOutput + 1;
+  step2 = (int)audioOutput2 + 1;
   
   step += 1;
   

@@ -2,12 +2,62 @@ int score = 0, hits;
 int lives = 5;
 float scoreMultiplier = 1;
 
-void updateScore(int amount)
+void displayData()
+{
+  fill(0, 200, 70);
+  textAlign(LEFT);
+  textSize(20);
+  text("Score : " + score, 0, 25);
+  text("Lives : " + lives, 250, 25);
+  text("multiplier : " + scoreMultiplier, 465, 25);
+  fill(255);
+  
+  fill(0, 200, 70, alpha);
+  text("+" + (int)points, floatingUIPos.x, floatingUIPos.y);
+  alpha -= 10;
+  floatingUIPos.y --;
+  
+  pUpScoreDisplay();
+}
+
+PVector pUpScorePos = new PVector(100, 100);
+float puAlpha = 0;
+float puPoints = 0;
+void pUpScoreDisplay()
+{
+  puAlpha--;
+  pUpScorePos.y--;
+  fill(255, 255, 25, puAlpha);
+  text("+" + (int)puPoints, pUpScorePos.x, pUpScorePos.y);
+}
+
+void updateScore(int amount, PVector pos)
 {
   scoreMultiplier += 1;
   score += (amount * scoreMultiplier);
   brickIsHit = true;
   hits++;
+  UpdateFloatingUI(amount * scoreMultiplier, pos);
+}
+
+void updateScorePU(int amount)
+{
+  scoreMultiplier += 1;
+  score += (amount * scoreMultiplier);
+  puPoints = (amount * scoreMultiplier);
+  puAlpha = 255;
+  pUpScorePos.x = pUp.PUPos.x;
+  pUpScorePos.y = pUp.PUPos.y;
+}
+
+PVector floatingUIPos = new PVector(-100, -100);
+float points = 0, alpha;
+
+void UpdateFloatingUI(float _points, PVector pos)
+{
+  points = _points;
+  alpha = 255;
+  floatingUIPos = pos;
 }
 
 void updateLives(int amount)
@@ -19,16 +69,8 @@ void updateLives(int amount)
   }
 }
 
-void displayData()
-{
-  fill(0, 255, 0);
-  textAlign(LEFT);
-  textSize(20);
-  text("Score : " + score, 0, 25);
-  text("Lives : " + lives, 250, 25);
-  text("multiplier : " + scoreMultiplier, 450, 25);
-  fill(255);
-}
+
+///////HIGH SCORE HANDLER
 
 boolean listLoaded = false;
 String firstName, secondName, thirdName, fourthName, fifthName;
@@ -46,9 +88,9 @@ void highScoreList()
     }
   }
   
-  fill(150, 80);
+  fill(150, 5);
   rect(width / 2, height / 2, width * 0.7f, width * 0.5f);
-  fill(0,255,0);
+  fill(0,200,70);
   textAlign(CENTER);
   textSize(30);
   text("HIGH SCORES", width / 2, height / 2 + 25, width * 0.7f, width * 0.5f);
@@ -134,12 +176,6 @@ void calculateHighScores()
       }
     } 
     
-//    println("First : " + firstName + " " + first + " points");
-//    println("Second " + secondName + " " + second + " points");
-//    println("Third " + thirdName + " " + third + " points");
-//    println("Fourth " + fourthName + " " + fourth + " points");
-//    println("Fifth " + fifthName + " " + fifth + " points");
-    
     listLoaded = true;
 }
 
@@ -152,7 +188,7 @@ void textInput()
     fill(150, 80);
     rect(width / 2, height / 6, width * 0.7f, height * 0.1f);
  
-    fill(0, 255, 0);
+    fill(0, 200, 70);
     text(myName, width / 2, height / 6, width * 0.7f, height * 0.1f); 
   }
 }
