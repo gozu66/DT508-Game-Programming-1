@@ -219,7 +219,7 @@ class PowerUp                        //POWER UP CLASS
   
   void PUDraw()
   {
-    fill(255, 255, 25);
+    fill(myGold);
     for(int i = 0; i < 5; i++)
     {
       int x = (int)random(50);

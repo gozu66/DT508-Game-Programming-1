@@ -59,10 +59,18 @@ void mousePressed()
     
     case 4:
       _state = 0;
+      score = 0;
+      hits = 0;
+      currentLevel = 1;
+
     break;
     
     case 5:
       _state = 0;
+      score = 0;
+      hits = 0;
+      currentLevel = 1;
+
     break;
     
     case 6:
@@ -70,6 +78,7 @@ void mousePressed()
       _state = currentLevel + 1;
       currentLevel++;
       assembleLevel(_state);
+      hits = 0;
     
     break;
   }  

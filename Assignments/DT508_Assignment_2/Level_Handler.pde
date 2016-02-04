@@ -14,7 +14,7 @@ void assembleLevel(int currentState)
       numOfBricks = 20;
       rows = 5;
       cols = 4;
-      hits = 0;
+//      hits = 0;
       lives = 5;
     }
     else if (_state == 2)
@@ -22,7 +22,7 @@ void assembleLevel(int currentState)
       numOfBricks = 30;
       rows = 6;
       cols = 5;
-      hits = 0;
+//      hits = 0;
       lives = 5;
     }
     else if (_state == 3)
@@ -30,10 +30,11 @@ void assembleLevel(int currentState)
       numOfBricks = 50;
       rows = 5;
       cols = 10;
-      hits = 0;
+//      hits = 0;
       lives = 5;
     }
 
+    hits = 0;
     paddle = new Paddle();
     ball = new Ball();
     bricks = new Brick[numOfBricks];

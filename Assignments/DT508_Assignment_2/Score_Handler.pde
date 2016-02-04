@@ -4,7 +4,7 @@ float scoreMultiplier = 1;
 
 void displayData()
 {
-  fill(0, 200, 70);
+  fill(myGreen);
   textAlign(LEFT);
   textSize(20);
   text("Score : " + score, 0, 25);

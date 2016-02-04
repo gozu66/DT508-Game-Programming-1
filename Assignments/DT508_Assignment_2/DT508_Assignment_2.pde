@@ -14,6 +14,8 @@ boolean setupComplete;
 Minim minim;
 AudioPlayer paddleHit, brickHit, wallHit, lifeLost, powerUpHit, music;
 
+color myGreen, myGold;
+
 void setup()
 {
   size(700, 700);
@@ -41,11 +43,16 @@ void setup()
 
   myFont = createFont("ka1.ttf", 40);
   
+  myGreen = color(0, 200, 70);
+  myGold = color(255, 255, 25);
+
   background(0);
 }
 
 void draw()
 {
+//  println(_state);
+
   if (keyPressed)
   {
     getKeys();
@@ -65,7 +72,7 @@ void draw()
     textFont(myFont);
     textSize(60);
     textAlign(CENTER);
-    fill(0,200,70);
+    fill(myGreen);
     text("BREAKOUT 2016", width/2, height/3);
     textSize(30);
     textAlign(RIGHT);
@@ -138,7 +145,7 @@ void draw()
 
     textSize(50);
     textAlign(CENTER);
-    fill(0, 200, 70);
+    fill(myGreen);
     text("GAME OVER", width/2, height*0.25f);
     textSize(20);
     text("Click to Continue", width/2, height*0.75f);
@@ -149,7 +156,7 @@ void draw()
 
     highScoreList();
     textSize(20);
-    fill(0, 200, 70);
+    fill(myGreen);
     text("Click to Continue", width/2, height*0.9f);
 
     break;
@@ -158,12 +165,10 @@ void draw()
     displayData();
 
     textAlign(CENTER);
-    fill(0, 200, 70);
+    fill(myGreen);
     text("Stage Complete", width/2, height/3);
     text("Click to Continue", width/2, height*0.5f);
 
     break;
   }
-
-  println(frameRate);
 }

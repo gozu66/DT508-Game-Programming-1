@@ -47,7 +47,7 @@ void drawBackground()
         else
         {
           int loc = x + (y * width);
-          color c  = color(255, 255, 255);
+          color c  = color(255);
           pixels[loc] = c;
         }
       }
