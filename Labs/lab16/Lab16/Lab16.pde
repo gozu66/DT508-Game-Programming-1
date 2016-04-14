@@ -19,20 +19,16 @@ void draw()
   {
     Particle p = nathan.get(i);
     p.render();
-  }
-      
-  println(nathan.size());
+  }    
 }
 
 void Brianna()
 {
   nathan.add(new Particle());
   
-  for(int i = 0; i < nathan.size(); i++)
-  {
-    Particle p = nathan.get(i);
-    p.render();
-    p.update();
-  }
-
+  //for(int i = 0; i < nathan.size(); i++)
+  //{
+  //  Particle p = nathan.get(i);
+  //  p.render();
+  //}
 }
